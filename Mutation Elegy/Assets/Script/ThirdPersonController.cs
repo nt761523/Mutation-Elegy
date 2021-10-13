@@ -35,6 +35,13 @@ public class ThirdPersonController : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    private void Update()
+    {
+        if (Input.GetKeyDown("space") && this.isGrounded) {
+            Jump(jumpHeight);
+        }
+    }
     void FixedUpdate()
     {
         h = Input.GetAxis("Horizontal");
@@ -42,15 +49,13 @@ public class ThirdPersonController : MonoBehaviour
         direction = new Vector3(h, 0f, v).normalized;
 
         isMoveing = h != 0 || v != 0;
-        if (isMoveing && this.isGrounded)
+        //if (isMoveing && this.isGrounded)
+        if(isMoveing)
         {
             Move();
         }
         Animation_Walk();
-        if (Input.GetKeyDown("space") && this.isGrounded)
-        {
-            Jump(jumpHeight);
-        }
+       
     }    
     private void OnCollisionEnter(Collision collision)
     {
