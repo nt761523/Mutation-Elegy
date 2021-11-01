@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 099cc8447044a6c4d8551d6b7e4eeb82
+guid: aefad67818808174f8ad427465dbb683
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -96,8 +96,8 @@ ModelImporter:
     sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -141,7 +141,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: 
+    rootMotionBoneName: Root_M
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
