@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 00f590dbe7175f742a656be579934926
+guid: 9db8aba085d0439489e585e94c35c393
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: 6720303635017113406
-    second: Attack
+      74: 4348485665485846014
+    second: Death
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -26,7 +26,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -35,23 +35,23 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Attack
-      takeName: Attack
+      name: Death
+      takeName: Death
       internalID: 0
       firstFrame: 1
-      lastFrame: 51
+      lastFrame: 139
       wrapMode: 0
       orientationOffsetY: 0
-      level: -0.09
+      level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
+      loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0

@@ -12,7 +12,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Belt_SD1
+    second: {fileID: 2100000, guid: ff58e2d888d64484eac1c7b7f9df0429, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Black_Leather
+    second: {fileID: 2100000, guid: daf26468c28baa946b01eea68c12bb02, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black_Leather1
     second: {fileID: 2100000, guid: daf26468c28baa946b01eea68c12bb02, type: 2}
   - first:
       type: UnityEngine:Material
@@ -22,7 +32,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Cloth_SD1
+    second: {fileID: 2100000, guid: eca9fc7a53d6b4645b880bd03dc965d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Copper_SD
+    second: {fileID: 2100000, guid: 3238d26e989db004fb389a016feaf17d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Copper_SD1
     second: {fileID: 2100000, guid: 3238d26e989db004fb389a016feaf17d, type: 2}
   - first:
       type: UnityEngine:Material
@@ -32,7 +52,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Glass_SD1
+    second: {fileID: 2100000, guid: fe42ae822d61e5c45b39d52a0a9adf87, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Glove_SD
+    second: {fileID: 2100000, guid: 697d00475f7bc1049a55309d6542f207, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glove_SD1
     second: {fileID: 2100000, guid: 697d00475f7bc1049a55309d6542f207, type: 2}
   - first:
       type: UnityEngine:Material
@@ -42,7 +72,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Hat_SD1
+    second: {fileID: 2100000, guid: b13266df474ddd741a85ec35e8d600db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mask_SD
+    second: {fileID: 2100000, guid: f5012d77727d096458aeccb58e3d3639, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mask_SD1
     second: {fileID: 2100000, guid: f5012d77727d096458aeccb58e3d3639, type: 2}
   - first:
       type: UnityEngine:Material
@@ -52,12 +92,27 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Pants_SD1
+    second: {fileID: 2100000, guid: fbf862f0547b8d8439bcc452d4fa29f5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Shoes_SD
     second: {fileID: 2100000, guid: c403ec9bfe29e0b4b9c0e687647d17a7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Shoes_SD1
+    second: {fileID: 2100000, guid: c403ec9bfe29e0b4b9c0e687647d17a7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Skin_SD
+    second: {fileID: 2100000, guid: 5f5b84d275ac00446b7b5535272d1a04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin_SD1
     second: {fileID: 2100000, guid: 5f5b84d275ac00446b7b5535272d1a04, type: 2}
   materials:
     materialImportMode: 2
@@ -106,9 +161,9 @@ ModelImporter:
     weldVertices: 1
     bakeAxisConversion: 0
     preserveHierarchy: 0
-    skinWeightsMode: 0
-    maxBonesPerVertex: 4
-    minBoneWeight: 0.001
+    skinWeightsMode: 1
+    maxBonesPerVertex: 3
+    minBoneWeight: 0.1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -128,7 +183,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 0
+  importAnimation: 1
   humanDescription:
     serializedVersion: 3
     human: []
