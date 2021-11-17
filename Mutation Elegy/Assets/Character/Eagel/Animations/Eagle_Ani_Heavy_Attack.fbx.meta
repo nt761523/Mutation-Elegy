@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 00f590dbe7175f742a656be579934926
+guid: 3b65ccbaddf8c504bb7b7deee238baff
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: 6720303635017113406
-    second: Attack
+      74: 4618592284547460834
+    second: Heavy_Attack
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,14 +35,14 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Attack
-      takeName: Attack
+      name: Heavy_Attack
+      takeName: Heavy_Attack
       internalID: 0
       firstFrame: 1
-      lastFrame: 51
+      lastFrame: 91
       wrapMode: 0
       orientationOffsetY: 0
-      level: -0.09
+      level: -0.07
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
