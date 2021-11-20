@@ -25,11 +25,15 @@ public class Throw : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
+            //Invoke("ProduceBullet", 0.05f);
             ProduceBullet();
         }
     }
     void ProduceBullet()
     {
-        GameObject newbullet = Instantiate(Bullet, Muzzle.position, Muzzle.rotation);
+        Vector3 offect = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
+        Instantiate(Bullet, Muzzle.position + offect, Muzzle.rotation);
+        //Instantiate(Bullet, Muzzle.position + offect, Muzzle.rotation);
+        //Instantiate(Bullet, Muzzle.position + offect, Muzzle.rotation);
     }
 }

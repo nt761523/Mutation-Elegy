@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Title : MonoBehaviour
 {
     [Header("設定選單")]
@@ -21,7 +21,7 @@ public class Title : MonoBehaviour
 
     public void StartGame()
     {
-        
+        SceneManager.LoadScene("LV_01_Forest");
     }
 
     public void GoToOption()
