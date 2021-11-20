@@ -31,7 +31,8 @@ public class Controller : MonoBehaviour
     {
         rig = GetComponent<Rigidbody>();
         anim = gameObject.GetComponentInChildren<Animator>();
-        model = GameObject.Find("YBot").GetComponent<Transform>();
+        //model = GameObject.Find("YBot").GetComponent<Transform>();
+        model = GameObject.Find("Eagle").GetComponent<Transform>();
     }
     // Start is called before the first frame update
     void Start()
@@ -60,10 +61,11 @@ public class Controller : MonoBehaviour
         //    model.transform.forward = inputdir;
         //}
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            anim.SetTrigger("Evade");
-        }
+
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    anim.SetTrigger("Evade");
+        //}
 
 
         //Camera.main.transform.forward
