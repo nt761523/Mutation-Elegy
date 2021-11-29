@@ -38,7 +38,7 @@ ModelImporter:
       name: Death
       takeName: Death
       internalID: 0
-      firstFrame: 1
+      firstFrame: 20
       lastFrame: 139
       wrapMode: 0
       orientationOffsetY: 0
@@ -122,7 +122,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: aefad67818808174f8ad427465dbb683, type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: aaf148d51e34b5747b22de160cd340af, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1

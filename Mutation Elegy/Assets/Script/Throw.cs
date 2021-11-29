@@ -23,7 +23,7 @@ public class Throw : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(2))
         {
             //Invoke("ProduceBullet", 0.05f);
             ProduceBullet();
