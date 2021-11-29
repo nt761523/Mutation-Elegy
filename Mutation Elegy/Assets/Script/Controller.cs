@@ -21,7 +21,7 @@ public class Controller : MonoBehaviour
     Vector3 newPosition;
 
     public Vector3 attackoffset = new Vector3(0f, 1f, 0.95f);
-    public float attackoradio = 1f;
+    //public float attackoradio = 1f;
 
     public CameraShake cameraShake;
 
@@ -34,11 +34,7 @@ public class Controller : MonoBehaviour
         //model = GameObject.Find("YBot").GetComponent<Transform>();
         model = GameObject.Find("Eagle").GetComponent<Transform>();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
     // Update is called once per frame
     void Update()
     {
@@ -81,13 +77,19 @@ public class Controller : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            anim.SetTrigger("Attack");
-            checkHit();
-
+            anim.SetTrigger("Nattack");
+            //checkHit();
         }
-
-        
-
+        if (Input.GetMouseButtonDown(1))
+        {
+            anim.SetTrigger("Hattack");
+            //checkHit();
+        }
+        if (Input.GetMouseButtonDown(2))
+        {
+            anim.SetTrigger("Throw");
+        }
+        StaticVal.playerpos = transform;
     }
     private void FixedUpdate()
     {
@@ -108,69 +110,91 @@ public class Controller : MonoBehaviour
         rig.MovePosition(rig.position + inputdir * runspeed * Time.fixedDeltaTime);
         rig.MoveRotation(targetRotation);
     }
-
-
     /// <summary>
     /// Animator 使用
     /// </summary>
-    public void OnAttack1Enter()
-    {                      
-        lockinput = true;
-        lerpTarget = 1.0f;
-    }
-    public void OnAttack1Update()
+    //public void OnAttack1Enter()
+    //{                      
+    //    lockinput = true;
+    //    lerpTarget = 1.0f;
+    //}
+    //public void OnAttack1Update()
+    //{
+    //    currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("Attack"));
+    //    currentWeight = Mathf.Lerp(currentWeight, lerpTarget, 0.3f);
+    //    anim.SetLayerWeight(anim.GetLayerIndex("Attack"), currentWeight);
+    //}
+    //public void OnAttackIdle()
+    //{
+    //    lerpTarget = 0.0f;
+    //    lockinput = false;
+    //}
+    //public void OnAttackIdleUpdate()
+    //{
+    //    currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("Attack"));
+    //    currentWeight = Mathf.Lerp(currentWeight, lerpTarget, 0.3f);
+
+    //    anim.SetLayerWeight(anim.GetLayerIndex("Attack"), currentWeight);
+    //}
+    public void OnIdleEnter()
     {
-        currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("Attack"));
-        currentWeight = Mathf.Lerp(currentWeight, lerpTarget, 0.3f);
-        anim.SetLayerWeight(anim.GetLayerIndex("Attack"), currentWeight);
-    }
-    public void OnAttackIdle()
-    {
-        lerpTarget = 0.0f;
         lockinput = false;
     }
-    public void OnAttackIdleUpdate()
+    public void OnNAttackEnter()
     {
-        currentWeight = anim.GetLayerWeight(anim.GetLayerIndex("Attack"));
-        currentWeight = Mathf.Lerp(currentWeight, lerpTarget, 0.3f);
-
-        anim.SetLayerWeight(anim.GetLayerIndex("Attack"), currentWeight);
+        anim.SetBool("Nmode", true);
+        lockinput = true;
+    }
+    public void OnNAttackExit()
+    {
+        anim.SetBool("Nmode", false);
+    }
+    public void OnHAttackEnter()
+    {
+        anim.SetBool("Hmode", true);
+        lockinput = true;
+    }
+    public void OnHAttackExit()
+    {
+        anim.SetBool("Hmode", false);
     }
     /// <summary>
     /// 攻擊範圍繪製
     /// </summary>
     private void OnDrawGizmos()
     {
+        //StaticVal.attackRange = transform.position + transform.right * attackoffset.x + transform.up * attackoffset.y + transform.forward * attackoffset.z;
         Gizmos.color = new Color(1f, 0f, 0f, 0.3f);
+        //Gizmos.DrawSphere(StaticVal.attackRange, StaticVal.attackoradio);
         Gizmos.DrawSphere(
             transform.position +
-            transform.right * attackoffset.x +
-            transform.up * attackoffset.y +
-            transform.forward * attackoffset.z,
-            attackoradio);
+            transform.right * StaticVal.attackoffset.x +
+            transform.up * StaticVal.attackoffset.y +
+            transform.forward * StaticVal.attackoffset.z,
+            StaticVal.attackoradio);
     }
-    void checkHit()
-    {
-        Collider[] hits = Physics.OverlapSphere(
-            transform.position +
-            transform.right * attackoffset.x +
-            transform.up * attackoffset.y +
-            transform.forward * attackoffset.z,
-            attackoradio, 1 << 6);
-        if (hits.Length > 0)
-        {
-            print("攻擊到：" + hits[0].name);
-            Rigidbody enemy = hits[0].GetComponent<Rigidbody>();
-            Collider other = hits[0].GetComponent<Collider>();
-            enemy.AddForce(new Vector3(0, 2, 1), ForceMode.Impulse);            
-            Vector3 dispalyLocation = Camera.main.WorldToScreenPoint(enemy.transform.position + Vector3.up * 0.8f);
-            //計算傷害&顯示
-            GameObject.Find("UICanvas").GetComponent<UIsetting>().Generate_DamageText(dispalyLocation, 2, other);
+    //void checkHit()
+    //{
+    //    Collider[] hits = Physics.OverlapSphere(
+    //        transform.position +
+    //        transform.right * attackoffset.x +
+    //        transform.up * attackoffset.y +
+    //        transform.forward * attackoffset.z,
+    //        attackoradio, 1 << 6);
+    //    if (hits.Length > 0)
+    //    {
+    //        print("攻擊到：" + hits[0].name);
+    //        Rigidbody enemy = hits[0].GetComponent<Rigidbody>();
+    //        Collider other = hits[0].GetComponent<Collider>();
+    //        enemy.AddForce(new Vector3(0, 2, 1), ForceMode.Impulse);            
+    //        Vector3 dispalyLocation = Camera.main.WorldToScreenPoint(enemy.transform.position + Vector3.up * 0.8f);
+    //        //計算傷害&顯示
+    //        GameObject.Find("UICanvas").GetComponent<UIsetting>().Generate_DamageText(dispalyLocation, 2, other);
 
-            //StartCoroutine(cameraShake.Shake());
-        }
-        else
-            print("沒有攻擊到目標");
-        //return hits;
-    }
+    //        //StartCoroutine(cameraShake.Shake());
+    //    }
+    //    else
+    //        print("沒有攻擊到目標");
+    //    //return hits;
+    //}
 }

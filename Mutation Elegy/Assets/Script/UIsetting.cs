@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class UIsetting : MonoBehaviour
 {
@@ -73,8 +74,11 @@ public class UIsetting : MonoBehaviour
     {
         if (other.GetComponent<BaseProties>().currentHp <= 0)
         {
-            Destroy(other.GetComponent<BaseProties>().hpBar.gameObject);
-            Destroy(other.gameObject);
+            other.GetComponent<Animator>().SetBool("Die", true);
+            other.GetComponent<NavMeshAgent>().enabled = false;
+            other.GetComponent<BoxCollider>().enabled = false;
+            //Destroy(other.GetComponent<BaseProties>().hpBar.gameObject);
+            //Destroy(other.gameObject);
         }
     }
 }

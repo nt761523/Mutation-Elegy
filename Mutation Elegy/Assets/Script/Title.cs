@@ -21,7 +21,7 @@ public class Title : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("LV_01_Forest");
+        SceneManager.LoadScene("Story");
     }
 
     public void GoToOption()
