@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Controller : MonoBehaviour
 {
     public Rigidbody rig;
     public Animator anim;
     public Transform model;
+    public CapsuleCollider playercollider;
+    public Vector3 colliderpos;
+
     public float runspeed = 5;
     public float turnspeed = 5;
 
@@ -23,14 +27,20 @@ public class Controller : MonoBehaviour
     public Vector3 attackoffset = new Vector3(0f, 1f, 0.95f);
     //public float attackoradio = 1f;
 
-    public CameraShake cameraShake;
+    
 
     float currentWeight;
     float lerpTarget;
+
+
+    public bool iscollidermove;
+
+
     private void Awake()
     {
         rig = GetComponent<Rigidbody>();
-        anim = gameObject.GetComponentInChildren<Animator>();
+        //anim = gameObject.GetComponentInChildren<Animator>();
+        anim = GetComponentInChildren<Animator>();
         //model = GameObject.Find("YBot").GetComponent<Transform>();
         model = GameObject.Find("Eagle").GetComponent<Transform>();
     }
@@ -82,15 +92,18 @@ public class Controller : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1))
         {
-            anim.SetTrigger("Hattack");
+            anim.SetTrigger("Hattack");          
             //checkHit();
         }
+
+
         if (Input.GetMouseButtonDown(2))
         {
             anim.SetTrigger("Throw");
         }
         StaticVal.playerpos = transform;
     }
+
     private void FixedUpdate()
     {
         if(inputdir == Vector3.zero)
