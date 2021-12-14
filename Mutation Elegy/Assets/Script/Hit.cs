@@ -1,7 +1,13 @@
 using UnityEngine;
+using System.Collections;
 
 public class Hit : MonoBehaviour
-{    
+{
+    public CameraShake camerashake;
+    public Controller controller;
+    private bool iscollidermove;
+    public int damage;
+
     void checkHit()
     {
         Collider[] hits = Physics.OverlapSphere(
@@ -27,9 +33,14 @@ public class Hit : MonoBehaviour
                 Animator animator = hits[i].GetComponent<Animator>();
                 //enemy.AddForce(new Vector3(0, 1, -1), ForceMode.Impulse);
                 animator.SetTrigger("Hurt");
-                Vector3 dispalyLocation = Camera.main.WorldToScreenPoint(animator.transform.position + Vector3.up * 0.8f);
+                //Vector3 dispalyLocation = Camera.main.WorldToScreenPoint(animator.transform.position + Vector3.up * 0.8f);
                 //計算傷害&顯示
-                GameObject.Find("UICanvas").GetComponent<UIsetting>().Generate_DamageText(dispalyLocation, 2, hits[i].GetComponent<Collider>());
+                //GameObject.Find("UICanvas").GetComponent<UIsetting>().Generate_DamageText(dispalyLocation, 2, hits[i].GetComponent<Collider>());
+
+                StartCoroutine(camerashake.Shake());
+                hits[i].GetComponent<HurtSystem>().Hurt(damage);
+
+
             }
 
             //print("攻擊到：" + hits[0].name);

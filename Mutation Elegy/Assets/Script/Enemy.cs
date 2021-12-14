@@ -1,14 +1,14 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    [Header("≤æ∞ ≥t´◊"),Range(0,20)]
+    [Header("ÁßªÂãïÈÄüÂ∫¶"),Range(0,20)]
     public float speed = 2.5f;
-    [Header("ß¿ª§O"), Range(0, 20)]
+    [Header("ÊîªÊìäÂäõ"), Range(0, 20)]
     public float attack = 5;
-    [Header("Ωd≥Ú:∞l¬‹&ß¿ª")]
+    [Header("ÁØÑÂúç:ËøΩËπ§&ÊîªÊìä")]
     [Range(0, 7)]
     public float rangeAttack = 1.5f;
     [Range(7, 20)]
@@ -17,8 +17,13 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private StateEnemy state;
 
+
+    [Header("ÊîªÊìäÁØÑÂúç‰ΩçÁßª&Â∞∫ÂØ∏")]
+    public Vector3 v3AttackOffset;
+    public Vector3 v3AttackSize = Vector3.one;
     private void OnDrawGizmos()
     {
+        #region ÊîªÊìä‰∏∂ËøΩËπ§Èö®Ê©üÁØÑÂúç&Ë°åËµ∞Â∫ßÊ®ô
         Gizmos.color = new Color(1,0,0.2f,0.3f);
         Gizmos.DrawSphere(transform.position,rangeAttack);
         Gizmos.color = new Color(0.2f, 1, 0, 0.3f);
@@ -29,12 +34,18 @@ public class Enemy : MonoBehaviour
             Gizmos.color = new Color(1f, 0, 0.2f, 0.3f);
             Gizmos.DrawSphere(v3RandomMoveFinal, 0.3f);
         }
+        #endregion
+
+        //ÊîªÊìäÁ¢∞ÊíûÂà§ÂÆöÁØÑÂúç
+        Gizmos.color = new Color(0.8f, 0.2f, 0.7f, 0.3f);
+        Gizmos.matrix = Matrix4x4.TRS(
+            transform.position +
+            transform.forward * v3AttackOffset.x +
+            transform.up * v3AttackOffset.y +
+            transform.right * v3AttackOffset.z,
+            transform.rotation, transform.localScale);
+        Gizmos.DrawCube(Vector3.zero, v3AttackSize);
     }
-
-
-
-
-
 
     private Animator animator;
     private NavMeshAgent nma;
@@ -43,10 +54,17 @@ public class Enemy : MonoBehaviour
         get => Random.insideUnitSphere * rangeTrack + transform.position;
     }
 
+    private Transform traPlayer;
+    private string namePlayer = "Player";
+
     private void Awake()
     {
+        traPlayer = GameObject.Find(namePlayer).transform;
         animator = GetComponent<Animator>();
         nma = GetComponent<NavMeshAgent>();
+        nma.speed = speed;
+
+        nma.SetDestination(transform.position);
     }
 
     private void Update()
@@ -65,8 +83,10 @@ public class Enemy : MonoBehaviour
                 Move();
                 break;
             case StateEnemy.Track:
+                Track();
                 break;
             case StateEnemy.Attack:
+                Attack();
                 break;
             case StateEnemy.Hurt:
                 break;
@@ -77,12 +97,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
-
     private bool isIdle;
-    [Header("µ•´›¿Hæ˜¨Ìº∆")]
+    [Header("Á≠âÂæÖÈö®Ê©üÁßíÊï∏")]
     public Vector2 v2RandomWait = new Vector2(1, 5);
     private void Idle()
     {
+        if (!targetIsDead && playerInTrackRange) state = StateEnemy.Track;
+
         if (isIdle) return;
         isIdle = true;
         //print("wait");
@@ -99,14 +120,14 @@ public class Enemy : MonoBehaviour
         isIdle = false;
     }
 
-
-
     private bool isMove;
-    [Header("≤æ∞ ¿Hæ˜¨Ìº∆")]
+    [Header("ÁßªÂãïÈö®Ê©üÁßíÊï∏")]
     public Vector2 v2RandomMove = new Vector2(3, 7);
     public Vector3 v3RandomMoveFinal;
     private void Move()
     {
+        if (!targetIsDead && playerInTrackRange) state = StateEnemy.Track;
+
         nma.SetDestination(v3RandomMoveFinal);
         animator.SetBool("Move", nma.remainingDistance > 0.1f);
 
@@ -128,4 +149,86 @@ public class Enemy : MonoBehaviour
         state = StateEnemy.Idle;
         isMove = false;
     }
+
+    private bool playerInTrackRange { get => Physics.OverlapSphere(transform.position, rangeTrack, 1 << 7).Length > 0; }
+
+    private bool isTrack;
+    private void Track()
+    {
+        if(!isTrack)
+        {
+            StopAllCoroutines();
+        }
+
+        isTrack = true;
+
+        nma.isStopped = false;
+        nma.SetDestination(traPlayer.position);
+        animator.SetBool("Move", true);
+
+        if (nma.remainingDistance <= rangeAttack) state = StateEnemy.Attack;
+    }
+    [Header("ÊîªÊìäÂÜ∑ÂçªÊôÇÈñì"),Range(0,5)]
+    public float timeAttack = 2.5f;
+    [Header("ÊîªÊìäÂª∂ÈÅ≤ÂÇ≥ÈÄÅÂÇ∑ÂÆ≥ÊôÇÈñì"), Range(0, 5)]
+    public float delaySendDamage = 0.5f;
+
+    private string parameterAttack = "Attack";
+    private bool isAttack;
+
+    private void Attack()
+    {
+        nma.isStopped = true;
+        animator.SetBool("Move",false);
+        nma.SetDestination(traPlayer.position);
+        LookAtPlayer();
+
+
+        if (nma.remainingDistance >= rangeAttack) state = StateEnemy.Track;
+
+        if (isAttack) return;
+        isAttack = true;
+
+        animator.SetTrigger(parameterAttack);
+
+        StartCoroutine(DelaySendDamageToTarget());
+    }
+
+    private bool targetIsDead;
+    private IEnumerator DelaySendDamageToTarget()
+    {
+        yield return new WaitForSeconds(delaySendDamage);
+
+        Collider[] hits = Physics.OverlapBox(transform.position +
+        transform.forward * v3AttackOffset.x +
+        transform.up * v3AttackOffset.y +
+        transform.right * v3AttackOffset.z,
+        v3AttackSize / 2, Quaternion.identity, 1 << 7);
+
+        if (hits.Length > 0) targetIsDead = hits[0].GetComponent<HurtSystem>().Hurt(attack);
+        if(targetIsDead) TargetDead();
+
+        float waitToNextAttack = timeAttack - delaySendDamage;
+        yield return new WaitForSeconds(waitToNextAttack);
+
+        isAttack = false;
+    }
+    private void TargetDead()
+    {
+        state = StateEnemy.Move;
+        isIdle = false;
+        isMove = false;
+
+        nma.isStopped = false;
+    }
+
+    [Header("Èù¢ÂêëÁé©ÂÆ∂ÁöÑÈÄüÂ∫¶"), Range(0, 50)]
+    public float speedLookAt = 10;
+    private void LookAtPlayer()
+    {
+        Quaternion angle = Quaternion.LookRotation(traPlayer.position - transform.position);
+        transform.rotation = Quaternion.Lerp(transform.rotation, angle, Time.deltaTime * speedLookAt);
+    }
+
+
 }

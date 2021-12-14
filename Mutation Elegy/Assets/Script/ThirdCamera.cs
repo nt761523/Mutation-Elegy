@@ -10,20 +10,23 @@ public class ThirdCamera : MonoBehaviour
 
     void Start()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+
     }
 
-    private void LateUpdate()
+    //private void LateUpdate()
+    //{
+    //    CamControl();
+    //}
+    public void CamControl(bool onoff)
     {
-        CamControl();
-    }
-    void CamControl()
-    {
-        mouseX += Input.GetAxis("Mouse X") * rorationSpeed;
-        mouseY -= Input.GetAxis("Mouse Y") * rorationSpeed;
-        //mouseY = Mathf.Clamp(mouseY, -35, 60);
-        mouseY = Mathf.Clamp(mouseY, -15, 35);
+        if (onoff) 
+        { 
+            mouseX += Input.GetAxis("Mouse X") * rorationSpeed;
+            mouseY -= Input.GetAxis("Mouse Y") * rorationSpeed;
+            //mouseY = Mathf.Clamp(mouseY, -35, 60);
+            mouseY = Mathf.Clamp(mouseY, -15, 35);
+        }
+
 
         transform.LookAt(Target);
         Target.rotation = Quaternion.Euler(mouseY, mouseX, 0);
