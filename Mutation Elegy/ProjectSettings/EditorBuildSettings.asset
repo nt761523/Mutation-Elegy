@@ -8,10 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Title.unity
     guid: 574aca8b8ce2fb14589cf76081765854
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Story.unity
     guid: d942a211af03d2a478e25519800e625a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LV_01_Forest_v1.unity
     guid: c43a701d2530970468b3b657ba3031b9
+  - enabled: 1
+    path: Assets/Scenes/LV_01_Forest_v2.unity
+    guid: 877b4cb1140657a4490ff0b24faacd60
   m_configObjects: {}

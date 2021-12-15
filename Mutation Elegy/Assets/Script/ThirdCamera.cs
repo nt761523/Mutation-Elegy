@@ -10,7 +10,6 @@ public class ThirdCamera : MonoBehaviour
 
     void Start()
     {
-
     }
 
     //private void LateUpdate()
