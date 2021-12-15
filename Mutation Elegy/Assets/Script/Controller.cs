@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Playables;
 
 public class Controller : MonoBehaviour
 {
@@ -35,6 +36,11 @@ public class Controller : MonoBehaviour
 
     public bool iscollidermove;
 
+    public PlayableDirector director1;
+    public PlayableDirector director2;
+
+    public float time_f;
+    public int time_i;
 
     private void Awake()
     {
@@ -48,6 +54,9 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        time_f += Time.deltaTime;
+        time_i = (int)time_f;
+
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         //inputdir = new Vector3(h, 0f, v).normalized;
@@ -55,12 +64,12 @@ public class Controller : MonoBehaviour
         inputdir = Camera.main.transform.forward * v + Camera.main.transform.right * h;
         inputdir.y = 0;
         inputdir.Normalize();
-        if (lockinput)
+        if (lockinput || time_i < 8)
         {
             inputdir = Vector3.zero;
         }
-
-        anim.SetBool("Run", (h != 0 || v != 0 ? true : false));
+        else
+            anim.SetBool("Run", (h != 0 || v != 0 ? true : false));
 
         //if(h != 0 || v != 0) 
         //{
@@ -210,4 +219,21 @@ public class Controller : MonoBehaviour
     //        print("沒有攻擊到目標");
     //    //return hits;
     //}
+    private void OnTriggerEnter(Collider other)
+    {        
+        if (other.tag == "Playable1")
+        {
+            //other.GetComponent<PlayableDirector>().Play();
+            director1.Play();
+            lockinput = true;
+            gameObject.transform.position = new Vector3(78, 0, 18);
+        }
+        if (other.tag == "Playable2")
+        {
+            //other.GetComponent<PlayableDirector>().Play();
+            director2.Play();
+            lockinput = true;
+            gameObject.transform.position = new Vector3(9, -9, 8);
+        }
+    }
 }
