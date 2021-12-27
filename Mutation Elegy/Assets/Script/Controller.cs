@@ -16,7 +16,7 @@ public class Controller : MonoBehaviour
     public float turnspeed = 5;
 
     Vector3 inputdir;
-    bool lockinput = false;
+    public bool lockinput = false;
 
     float h;
     float v;
@@ -39,8 +39,10 @@ public class Controller : MonoBehaviour
     public PlayableDirector director1;
     public PlayableDirector director2;
 
+    public GameObject swordAudio;
+
     public float time_f;
-    public int time_i;
+    //public int time_i;
 
     private void Awake()
     {
@@ -55,7 +57,7 @@ public class Controller : MonoBehaviour
     void Update()
     {
         time_f += Time.deltaTime;
-        time_i = (int)time_f;
+        StaticVal.time_i = (int)time_f;
 
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
@@ -64,7 +66,8 @@ public class Controller : MonoBehaviour
         inputdir = Camera.main.transform.forward * v + Camera.main.transform.right * h;
         inputdir.y = 0;
         inputdir.Normalize();
-        if (lockinput || time_i < 8)
+        //if (lockinput || StaticVal.time_i < 8)
+        if (lockinput)
         {
             inputdir = Vector3.zero;
         }
@@ -97,6 +100,7 @@ public class Controller : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             anim.SetTrigger("Nattack");
+            
             //checkHit();
         }
         if (Input.GetMouseButtonDown(1))
@@ -164,6 +168,7 @@ public class Controller : MonoBehaviour
     }
     public void OnNAttackEnter()
     {
+        Instantiate(swordAudio, Vector2.zero, Quaternion.identity);
         anim.SetBool("Nmode", true);
         lockinput = true;
     }
@@ -173,6 +178,7 @@ public class Controller : MonoBehaviour
     }
     public void OnHAttackEnter()
     {
+        Instantiate(swordAudio, Vector2.zero, Quaternion.identity);
         anim.SetBool("Hmode", true);
         lockinput = true;
     }
@@ -225,15 +231,25 @@ public class Controller : MonoBehaviour
         {
             //other.GetComponent<PlayableDirector>().Play();
             director1.Play();
-            lockinput = true;
+            //lockinput = true;
             gameObject.transform.position = new Vector3(78, 0, 18);
         }
         if (other.tag == "Playable2")
         {
             //other.GetComponent<PlayableDirector>().Play();
             director2.Play();
-            lockinput = true;
-            gameObject.transform.position = new Vector3(9, -9, 8);
+            //lockinput = true;
+            gameObject.transform.position = new Vector3(55, 0, 15);
         }
+    }
+    public void stopinput1s()
+    {
+        StartCoroutine(iestopinput());
+    }
+    IEnumerator iestopinput()
+    {
+        lockinput = true;
+        yield return new WaitForSeconds(2);
+        lockinput = false;
     }
 }
