@@ -8,6 +8,8 @@ public class Hit : MonoBehaviour
     private bool iscollidermove;
     public int damage;
 
+    [Header("傷害特效")]
+    public GameObject vfx;
     void checkHit()
     {
         Collider[] hits = Physics.OverlapSphere(
@@ -37,6 +39,8 @@ public class Hit : MonoBehaviour
                 //計算傷害&顯示
                 //GameObject.Find("UICanvas").GetComponent<UIsetting>().Generate_DamageText(dispalyLocation, 2, hits[i].GetComponent<Collider>());
 
+                //生成粒子特效
+                GameObject.Instantiate<GameObject>(vfx, StaticVal.playerpos.position + StaticVal.playerpos.up + StaticVal.playerpos.forward, Quaternion.identity, null);
                 StartCoroutine(camerashake.Shake());
                 hits[i].GetComponent<HurtSystem>().Hurt(damage);
 

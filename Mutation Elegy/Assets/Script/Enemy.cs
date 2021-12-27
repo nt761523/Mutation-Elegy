@@ -230,5 +230,8 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, angle, Time.deltaTime * speedLookAt);
     }
 
-
+    public void Dead()
+    {
+        StaticVal.Enemykilled++;
+    }
 }

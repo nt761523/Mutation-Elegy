@@ -8,6 +8,7 @@ TagManager:
   - SFX
   - Playable1
   - Playable2
+  - Boss
   layers:
   - Default
   - TransparentFX

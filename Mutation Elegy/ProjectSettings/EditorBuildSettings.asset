@@ -17,4 +17,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LV_01_Forest_v2.unity
     guid: 877b4cb1140657a4490ff0b24faacd60
+  - enabled: 1
+    path: Assets/Scenes/LV_01_Forest_Boss.unity
+    guid: 9e898510272569348a260794704ff802
+  - enabled: 1
+    path: Assets/Scenes/ProductionList.unity
+    guid: befafc34c84cb2e428dff460f77d0504
+  - enabled: 1
+    path: Assets/Scenes/Resources.unity
+    guid: 17fef675c41b9f4409d579a3888361f1
   m_configObjects: {}
